@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+
+# Ignore Data
+data/raw/*
+data/processed/*
+!sample.csv
+
+# Ignore Logs & State
+state/*
+logs/*
+
+# Ignore Infra Binaries
+infra/kafka/*
+infra/spark/*
+infra/cassandra/*
+infra/java/*
+!infra/*.sh        
+!infra/scripts/    
+!.gitkeep
