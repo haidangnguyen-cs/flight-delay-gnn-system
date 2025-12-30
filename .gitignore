@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+.venv/
 
 # Ignore Data
 data/raw/*
@@ -10,11 +11,3 @@ data/processed/*
 state/*
 logs/*
 
-# Ignore Infra Binaries
-infra/kafka/*
-infra/spark/*
-infra/cassandra/*
-infra/java/*
-!infra/*.sh        
-!infra/scripts/    
-!.gitkeep

@@ -1,0 +1,71 @@
+services:
+  # -----------------------------------------------------------
+  # 1. KAFKA (Official Apache Image)
+  # -----------------------------------------------------------
+  kafka:
+    image: apache/kafka:3.7.0
+    container_name: kafka-kraft
+    ports:
+      - "19092:19092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:19092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:19092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+    volumes:
+      - ./state/kafka:/var/lib/kafka/data
+
+  # -----------------------------------------------------------
+  # 2. CASSANDRA (Official Image)
+  # -----------------------------------------------------------
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra-db
+    ports:
+      - "9042:9042"
+    environment:
+      CASSANDRA_CLUSTER_NAME: "FlightCluster"
+      CASSANDRA_DC: "dc1"
+      CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
+      MAX_HEAP_SIZE: "512M"
+      HEAP_NEWSIZE: "100M"
+    volumes:
+      - ./state/cassandra:/var/lib/cassandra
+
+  # -----------------------------------------------------------
+  # 3. SPARK MASTER (Official Apache Image)
+  # -----------------------------------------------------------
+  spark-master:
+    image: apache/spark:3.5.1
+    container_name: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip 0.0.0.0 --port 7077 --webui-port 8090
+    ports:
+      - "8090:8090" 
+      - "7077:7077"
+    volumes:
+      - ./state/spark/logs:/opt/spark/logs
+
+  # -----------------------------------------------------------
+  # 4. SPARK WORKER (Official Apache Image)
+  # -----------------------------------------------------------
+  spark-worker:
+    image: apache/spark:3.5.1
+    container_name: spark-worker
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --webui-port 8091
+    ports:
+      - "8091:8091"
+    depends_on:
+      - spark-master
+    environment:
+      SPARK_WORKER_CORES: 2
+      SPARK_WORKER_MEMORY: 1G
+    volumes:
+      - ./state/spark/logs:/opt/spark/logs

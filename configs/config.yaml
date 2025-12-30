@@ -1,0 +1,15 @@
+# configs/config.yaml
+
+kafka:
+  bootstrap_servers: "localhost:19092"
+  topic_input: "flight_data_stream"   
+  topic_output: "flight_predictions"  
+
+cassandra:
+  keyspace: "flight_db"
+  table_historical: "historical_flights"
+
+model:
+  path: "state/models/gnn_v1.pth"
+  input_dim: 32
+  hidden_dim: 64
