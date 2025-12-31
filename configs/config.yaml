@@ -28,3 +28,6 @@ cassandra:
   port: 9042
   keyspace: "flight_ks"
   table_training: "training_data"
+
+spark:
+  checkpoint_location: "state/spark/checkpoints"
