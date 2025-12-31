@@ -3,7 +3,7 @@ import os
 
 class ConfigLoader:
     def __init__(self, config_path="configs/config.yaml"):
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         self.config_path = os.path.join(base_dir, config_path)
         self.config = self._load_config()
 

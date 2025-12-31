@@ -2,7 +2,7 @@ project_name: "FlightDelayPrediction"
 version: "1.0.0"
 
 system:
-  device: "cuda"
+  device: "cpu"
 
 paths:
   state_dir: "state/models"
