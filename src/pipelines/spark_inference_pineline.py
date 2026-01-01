@@ -1,26 +1,21 @@
-import sys
-import os
 import warnings
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, udf
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
-
+from src.models.predictor import FlightPredictor 
 from src.utils.config_loader import config
-KAFKA_BOOTSTRAP_SERVERS = config.get("kafka.bootstrap_servers")
+
+KAFKA_BOOTSTRAP_SERVERS = config.get("kafka.bootstrap_servers")[1]
 TOPIC_INPUT = config.get("kafka.topic_input")
-CHECKPOINT_LOCATION = config.get("spark.checkpoint_location")
-os.environ['PYSPARK_PYTHON'] = sys.executable
-os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+CHECKPOINT_LOCATION = config.get("spark.checkpoint_location")[0]
 
 predictor = None
 
 def get_predictor():
     global predictor
     if predictor is None:
-        from src.models.predictor import FlightPredictor
         predictor = FlightPredictor()
     return predictor
-
 
 def predict_delay_udf(origin, dest, carrier, day_month, day_week, crs_minutes, dist, temp, rhum, prcp, wspd, coco):
     model = get_predictor()
@@ -48,18 +43,17 @@ def predict_delay_udf(origin, dest, carrier, day_month, day_week, crs_minutes, d
 predict_spark_udf = udf(predict_delay_udf, FloatType())
 
 def start_spark_streaming():
-    
     spark = SparkSession.builder \
-        .appName("FlightDelayPredictionSpark") \
+        .appName("FlightDelayPrediction") \
         .config("spark.sql.streaming.checkpointLocation", CHECKPOINT_LOCATION) \
-        .config("spark.driver.bindAddress", "127.0.0.1") \
-        .config("spark.driver.host", "127.0.0.1") \
         .config("spark.ui.showConsoleProgress", "false") \
         .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1") \
+        .master("spark://spark-master:7077") \
+        .config("spark.executorEnv.PYTHONPATH", "/app") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
-
+    
     schema = StructType([
         StructField("ORIGIN", StringType()),
         StructField("DEST", StringType()),

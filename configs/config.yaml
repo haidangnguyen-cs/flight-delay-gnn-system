@@ -12,7 +12,7 @@ paths:
   carrier_encoder: "carrier_encoder.pkl"
 
 kafka:
-  bootstrap_servers: "localhost:19092"
+  bootstrap_servers: ["localhost:19092","kafka:9092"]
   topic_input: "flight_data_stream"
   topic_output: "flight_predictions"
   consumer_group: "flight_gnn_group"
@@ -30,4 +30,4 @@ cassandra:
   table_training: "training_data"
 
 spark:
-  checkpoint_location: "state/spark/checkpoints"
+  checkpoint_location: ["state/spark/checkpoint_inference", "state/spark/checkpoint_archiving"]

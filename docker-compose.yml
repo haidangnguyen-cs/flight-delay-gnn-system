@@ -44,7 +44,8 @@ services:
   # 3. SPARK MASTER (Official Apache Image)
   # -----------------------------------------------------------
   spark-master:
-    image: apache/spark:3.5.1
+    #image: apache/spark:3.5.1
+    build: .
     container_name: spark-master
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip 0.0.0.0 --port 7077 --webui-port 8090
     ports:
@@ -57,7 +58,8 @@ services:
   # 4. SPARK WORKER (Official Apache Image)
   # -----------------------------------------------------------
   spark-worker:
-    image: apache/spark:3.5.1
+    #image: apache/spark:3.5.1
+    build: .
     container_name: spark-worker
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --webui-port 8091
     ports:
@@ -69,3 +71,19 @@ services:
       SPARK_WORKER_MEMORY: 1G
     volumes:
       - ./state/spark/logs:/opt/spark/logs
+      - ./:/app
+  # -----------------------------------------------------------
+  inference-driver: 
+    build: .
+    container_name: inference-driver
+    command: tail -f /dev/null 
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      SPARK_MASTER_URL: "spark://spark-master:7077"
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092" 
+      CASSANDRA_HOST: "cassandra"
+    depends_on:
+      - spark-master
+      - kafka

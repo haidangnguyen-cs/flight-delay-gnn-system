@@ -68,6 +68,23 @@ wheels = [
 ]
 
 [[package]]
+name = "cassandra-driver"
+version = "3.29.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "geomet" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/06/47/4e0fbdf02a7a418997f16f59feba26937d9973b979d3f23d79fbd8f6186f/cassandra_driver-3.29.3.tar.gz", hash = "sha256:ff6b82ee4533f6fd4474d833e693b44b984f58337173ee98ed76bce08721a636", size = 294612, upload-time = "2025-10-22T15:15:01.335Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/5d/03af94c5f0da81c6d5e476b781151c3895e7734b30e819e1934601dda7f7/cassandra_driver-3.29.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:0785f6e0986089e922378ae3b64b5f696440aeb595fb84c2cf3ccef220c6ae91", size = 364328, upload-time = "2025-10-22T15:14:28.962Z" },
+    { url = "https://files.pythonhosted.org/packages/bb/27/01bff47c47a4e3553f00399f21630916258ed84e0b22f249f6dcc538ad20/cassandra_driver-3.29.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:1c241ba08473baf31a333feb59793190d01625541c2368d3bbb0f43a586f1d6a", size = 364948, upload-time = "2025-10-22T15:14:30.439Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/c8/60b8dde74270c15a77b417462344cbee827a752439434a50f6ecd0aceca4/cassandra_driver-3.29.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:064bf45d3ca87239e11168c0110676fc64f7fdbddb4bcba9be787b8ad5f6d734", size = 374346, upload-time = "2025-10-22T15:14:31.628Z" },
+    { url = "https://files.pythonhosted.org/packages/47/f6/19828944af2333a1740f22eac9496e760c16df9aa04922ee472c35cdcc9d/cassandra_driver-3.29.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:5f9858b5ccdf75dd89c20d74474b59dd3a2e2f86c7251b310011c46acdef3874", size = 374276, upload-time = "2025-10-22T15:14:33.135Z" },
+    { url = "https://files.pythonhosted.org/packages/2a/e3/09d9f33a35d69523991c4c487c2d0bb62882a9a31253d504fa8edb198521/cassandra_driver-3.29.3-cp311-cp311-win32.whl", hash = "sha256:84b24f69a7bbe76302330d47422a7fcc1998a6a96ffd414a795d7d95992b49cb", size = 341532, upload-time = "2025-10-22T15:14:34.795Z" },
+    { url = "https://files.pythonhosted.org/packages/be/0f/ec3dc7942a50c8e3e874059b893c429c59dd0e3dfa68065295cf5814a890/cassandra_driver-3.29.3-cp311-cp311-win_amd64.whl", hash = "sha256:26013d768b2ea4728c09144b08c0eb86ad692e85cb15f4e52e3107abca83683c", size = 349183, upload-time = "2025-10-22T15:14:36.214Z" },
+]
+
+[[package]]
 name = "certifi"
 version = "2025.11.12"
 source = { registry = "https://pypi.org/simple" }
@@ -99,6 +116,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/65/f6/62fdd5feb60530f50f7e38b4f6a1d5203f4d16ff4f9f0952962c044e919a/charset_normalizer-3.4.4-cp311-cp311-win_amd64.whl", hash = "sha256:5ae497466c7901d54b639cf42d5b8c1b6a4fead55215500d2f486d34db48d016", size = 106978, upload-time = "2025-10-14T04:40:50.844Z" },
     { url = "https://files.pythonhosted.org/packages/7a/9d/0710916e6c82948b3be62d9d398cb4fcf4e97b56d6a6aeccd66c4b2f2bd5/charset_normalizer-3.4.4-cp311-cp311-win_arm64.whl", hash = "sha256:65e2befcd84bc6f37095f5961e68a6f077bf44946771354a28ad434c2cce0ae1", size = 99969, upload-time = "2025-10-14T04:40:52.272Z" },
     { url = "https://files.pythonhosted.org/packages/0a/4c/925909008ed5a988ccbb72dcc897407e5d6d3bd72410d69e051fc0c14647/charset_normalizer-3.4.4-py3-none-any.whl", hash = "sha256:7a32c560861a02ff789ad905a2fe94e3f840803362c84fecf1851cb4cf3dc37f", size = 53402, upload-time = "2025-10-14T04:42:31.76Z" },
+]
+
+[[package]]
+name = "click"
+version = "8.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz", hash = "sha256:12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a", size = 295065, upload-time = "2025-11-15T20:45:42.706Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/98/78/01c019cdb5d6498122777c1a43056ebb3ebfeef2076d9d026bfe15583b2b/click-8.3.1-py3-none-any.whl", hash = "sha256:981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6", size = 108274, upload-time = "2025-11-15T20:45:41.139Z" },
 ]
 
 [[package]]
@@ -169,6 +198,7 @@ name = "flight-delay-gnn-system"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "cassandra-driver" },
     { name = "findspark" },
     { name = "kafka-python" },
     { name = "matplotlib" },
@@ -184,6 +214,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "cassandra-driver", specifier = ">=3.29.3" },
     { name = "findspark", specifier = ">=2.0.1" },
     { name = "kafka-python", specifier = ">=2.3.0" },
     { name = "matplotlib", specifier = ">=3.10.8" },
@@ -246,6 +277,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b6/27/954057b0d1f53f086f681755207dda6de6c660ce133c829158e8e8fe7895/fsspec-2025.12.0.tar.gz", hash = "sha256:c505de011584597b1060ff778bb664c1bc022e87921b0e4f10cc9c44f9635973", size = 309748, upload-time = "2025-12-03T15:23:42.687Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/51/c7/b64cae5dba3a1b138d7123ec36bb5ccd39d39939f18454407e5468f4763f/fsspec-2025.12.0-py3-none-any.whl", hash = "sha256:8bf1fe301b7d8acfa6e8571e3b1c3d158f909666642431cc78a1b7b4dbc5ec5b", size = 201422, upload-time = "2025-12-03T15:23:41.434Z" },
+]
+
+[[package]]
+name = "geomet"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2a/8c/dde022aa6747b114f6b14a7392871275dea8867e2bd26cddb80cc6d66620/geomet-1.1.0.tar.gz", hash = "sha256:51e92231a0ef6aaa63ac20c443377ba78a303fd2ecd179dc3567de79f3c11605", size = 28732, upload-time = "2023-11-14T15:43:36.764Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/af/90/3bc780df088d439714af8295196a4332a26559ae66fd99865e36f92efa9e/geomet-1.1.0-py3-none-any.whl", hash = "sha256:4372fe4e286a34acc6f2e9308284850bd8c4aa5bc12065e2abbd4995900db12f", size = 31522, upload-time = "2023-11-14T15:43:35.305Z" },
 ]
 
 [[package]]
