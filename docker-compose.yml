@@ -67,8 +67,8 @@ services:
     depends_on:
       - spark-master
     environment:
-      SPARK_WORKER_CORES: 2
-      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_MEMORY: 10G
+      SPARK_WORKER_OPTS: "-Dspark.worker.cleanup.enabled=true"
     volumes:
       - ./state/spark/logs:/opt/spark/logs
       - ./:/app

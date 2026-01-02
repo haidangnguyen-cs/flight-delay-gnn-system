@@ -22,6 +22,7 @@ model:
   hidden_dim: 64
   heads: 2
   threshold: 0.5
+  epochs: 1000
 
 cassandra:
   hosts: ["localhost"]
