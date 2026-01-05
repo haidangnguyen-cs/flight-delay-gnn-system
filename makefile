@@ -22,6 +22,7 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
+	@echo "  install          Install dependencies
 	@echo "  dashboard        Run Streamlit Dashboard (Local)"
 	@echo "  ingest           Run Data Ingestion Pipeline (Local -> Kafka)"
 	@echo "  archive          Run Data Archiving Pipeline (Kafka -> Cassandra)"
@@ -30,7 +31,11 @@ help:
 	@echo "  inference-spark  Run Spark Inference Pipeline (Inside Docker Container)"
 	@echo "======================================================================"
 
-# --- 1. DATA PIPELINES (LOCAL) ---
+install: ## Setup environment using uv
+	@echo "Installing dependencies..."
+	@uv sync
+
+# --- 2. DATA PIPELINES (LOCAL) ---
 ingest:
 	@echo "Starting Ingestion Pipeline..."
 	@$(PYTHON_CMD) -m src.pipelines.ingestion
@@ -39,12 +44,12 @@ archive:
 	@echo "Starting Archiving Pipeline..."
 	@$(PYTHON_CMD) -m src.pipelines.data_archiving
 
-# --- 2. TRAINING (LOCAL) ---
+# --- 3. TRAINING (LOCAL) ---
 train:
 	@echo "Starting Training Pipeline..."
 	@$(PYTHON_CMD) -m src.pipelines.training_pipeline
 
-# --- 3. INFERENCE (HYBRID) ---
+# --- 4. INFERENCE (HYBRID) ---
 inference-py:
 	@echo "Starting Python Inference..."
 	@$(PYTHON_CMD) -m src.pipelines.python_inference_pipeline
@@ -53,7 +58,7 @@ inference-spark:
 	@echo "Executing Spark Pipeline inside 'inference-driver' container..."
 	@docker exec -u 0 -it inference-driver python -m src.pipelines.spark_inference_pipeline
 
-# --- 4. DASHBOARD (LOCAL) ---
+# --- 5. DASHBOARD (LOCAL) ---
 dashboard:
 	@echo "Launching Dashboard..."
 	@$(STREAMLIT_CMD) src/dashboard/main.py
