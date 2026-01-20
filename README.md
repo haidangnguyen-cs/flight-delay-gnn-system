@@ -20,7 +20,7 @@ This project tackles the flight delay prediction problem by modeling the airport
 
 ## System Architecture
 
-The system follows a **Lambda Architecture** combined with an MLOps workflow:
+The system follows a **Kappa Architecture** combined with an MLOps workflow:
 
 1. **Ingestion Stream:** CSV data is published to Kafka topics as streaming events.
 
