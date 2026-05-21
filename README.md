@@ -1,4 +1,4 @@
-# Flight Delay Prediction GNN System
+# Flight Delay Prediction GNN System POC
 
 A real-time flight delay prediction system using **Graph Attention Networks (GATv2)**, integrated with a big data infrastructure including **Kafka, Spark Streaming**, and **Cassandra**.
 
